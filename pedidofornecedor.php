@@ -4,7 +4,25 @@
     include "Conexao.php";
     include "util.inc";
 ?>
-       
+
+<?php
+    $idpedido=$_GET["id"];
+    $sql = "SELECT * FROM pedido
+    WHERE idpedido = $idpedido";
+    $resultado= $conexao->query($sql);
+    while($linha=$resultado->fetch_array()){
+?>  
+<div class="col-xs-6">
+    <h2>Nº Pedido: <?php echo $linha["idPedido"]; ?></h2>
+</div>
+<div class="col-xs-6 text-right">
+    <h2>Data: <?php echo dataBR($linha["data"]); ?></h2>
+</div>
+<?php
+    }
+?>
+
+
 <div class="col-xs-12">
     Cliente
             <table class="table table-hover">
@@ -41,7 +59,7 @@
 ?>
 </table>
 </div>
-<div calss="col-xs-12">
+<div class="col-xs-12">
     Fornecedor
             <table class="table table-hover">
             <tr>
@@ -82,7 +100,7 @@
             ?>
         </table>
 </div>
-        <div calss="col-xs-12">
+        <div class="col-xs-12">
             <table class="table table-hover">
             <tr>
                 <th>Descrição</th>

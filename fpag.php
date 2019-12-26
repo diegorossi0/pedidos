@@ -56,10 +56,10 @@ header('Content-Type: text/html; charset=utf-8');
                 $resultado = $conexao->query($sql);
                 $linha=mysqli_fetch_array($resultado);
                 $titulo = leitura("tituloemail.txt");
-                disparoEmail($linha["email"], leitura('recebidoctxt.txt'), "$titulo $id");
-                echo "<script>alert('Forma de pagamento selecionada!');  window.location.href='selecao.php';</script>";
+                disparoEmail($linha["email"], leitura('recebidoctxt.txt'), "$titulo");
+                echo "<script>alert('Pedido Concluído com sucesso!');  window.location.href='selecao.php';</script>";
             }else{
-                echo "<script>alert('Erro na forma de pagamento!');</script>";
+                echo "<script>alert('Erro ao concluir o pedido!');</script>";
 
             }
         }

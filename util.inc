@@ -32,7 +32,7 @@ require 'PHPMailer-master/src/SMTP.php';
 
 function disparoEmail($emaildest, $mensagem, $assunto){
 
-$emaildest="diego.rossi@yahoo.com.br";
+$emaildest="gisapazatacado@gmail.com";
 
 $mail = new PHPMailer;
     $mail->isSMTP();
@@ -51,6 +51,7 @@ $mail = new PHPMailer;
     $mail->Subject = "$assunto";
     $mail->Body    = $mensagem;
     $mail->AltBody = strip_tags($mensagem);
+    $mail->CharSet = 'UTF-8';
      
     if(!$mail->send()) {
         echo 'Não foi possível enviar a mensagem.<br>';

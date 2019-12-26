@@ -42,11 +42,16 @@ session_start();
                     echo"Pedido concluído com Sucesso";
                 }
 
-                $sql="SELECT u.* FROM pedido p INNER JOIN usuario u ON p.usuario_idusuario=u.idusuario WHERE idpedido=$id";
+                $sql="SELECT u.*, p.rastreamento FROM pedido p INNER JOIN usuario u ON p.usuario_idusuario=u.idusuario WHERE idpedido=$id";
                 $resultado = $conexao->query($sql);
                 $linha=mysqli_fetch_array($resultado);
+                $rastreio = $linha["rastreamento"];
                 $titulo = leitura("tituloemail.txt");
-                disparoEmail($linha["email"], leitura('concluidotxt.txt'), "$titulo $id");
+                $corpoEmail = leitura('concluidotxt.txt');
+                //quebrar o texto quando localizar o |&%
+                $corpoEmail = explode("|&%", $corpoEmail);
+                $texto = $corpoEmail[0]."<b>".$rastreio."</b>".$corpoEmail[1];
+                disparoEmail($linha["email"], $texto, "$titulo");
                 
             }
 
